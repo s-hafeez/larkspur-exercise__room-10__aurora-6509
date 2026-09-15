@@ -11,7 +11,7 @@ Steps and gates:  https://anthropicpartnerbasecamp.bts.com/
 from __future__ import annotations
 from typing import Any, Dict, List
 from support import (MODEL, SYSTEM_PROMPT, call_local, execute_tool, mcp_client,
-                     new_session, next_available_day, record_tool_result,
+                     new_session, next_available_day, record_tool_result,  # noqa: F401
                      runtime_preamble)
 
 MAX_TOOL_CALLS = 8  # Larkspur's own build capped the loop here; then a human takes over.
@@ -68,15 +68,15 @@ def run_agent(pnr: str, last_name: str, message: str) -> str:            # âœï¸
     answer = ""
     turns = 1
     while response.stop_reason == "tool_use" and turns < MAX_TOOL_CALLS:
-        messages.append({"role": "assistant", "content": text_of(response)})
+        messages.append({"role": "assistant", "content": response.content})
         messages.append({"role": "user", "content": tool_results(response)})
-        answer = text_of(response)
+        
         response = client.messages.create(
             model=MODEL, max_tokens=4096, system=runtime_preamble() + SYSTEM_PROMPT + TONE_ADDENDUM,
             thinking={"type": "adaptive"}, tools=tools, messages=messages,
         )
         turns += 1
-
+    answer = text_of(response)
     return answer
 
 
