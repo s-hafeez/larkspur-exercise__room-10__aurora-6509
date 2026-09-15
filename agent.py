@@ -40,7 +40,7 @@ EXTRA_TOOLS: List[Dict[str, Any]] = [    # ✏️ Build 2, step 2.1: schemas for
     }
 ]
 LOCAL_TOOLS: Dict[str, Any] = {         # ✏️ Build 2, step 2.1: the functions behind them
-    "next_available_day": next_available_day,
+    # "next_available_day": next_available_day, ## Uncomment when running 2.1 and comment out when running 2.2, because the MCP server has it too.
 }
 
 
@@ -106,7 +106,8 @@ def run_agent(pnr: str, last_name: str, message: str) -> str:            # ✏�
 def tool_list() -> List[Dict[str, Any]]:                   # ✏️ Build 2, step 2.2
     """Given. Exactly what Claude is offered on every turn; run.py --show-tools
     prints this list."""
-    return build_tools() + EXTRA_TOOLS
+    return build_tools() + mcp_client.tools()  # step 2.2: + mcp_client.tools()
+    # return build_tools() + EXTRA_TOOLS  # step 2.1: comment out mcp_client.tools() above
 
 
 # ──────────────────────────────────────────────────────────────────────────────
