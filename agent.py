@@ -117,14 +117,14 @@ def build_tools() -> List[Dict[str, Any]]:                 # ✏️ Build 1, ste
                 "type": "object",
                 "properties": {
                     "flight_no": {"type": "string"},
-                    "date": {"type": "string", "description": "MM/DD/YYYY"},
+                    "date": {"type": "string", "description": "YYYY-MM-DD"},
                 },
                 "required": ["flight_no", "date"],
             },
         },
         {
             "name": "search_alternatives",
-            "description": "search",
+            "description": "Search for available rebooking options on a disrupted booking. Call after get_flight_status confirms a cancellation or significant delay. Returns a list of alternatives, each with an option_id that hold_seat needs.",
             "input_schema": {
                 "type": "object",
                 "properties": {"pnr": {"type": "string"}},
