@@ -18,11 +18,12 @@ MAX_TOOL_CALLS = 8  # Larkspur's own build capped the loop here; then a human ta
 
 TONE_ADDENDUM = (                        # ✏️ Build 4, step 4.1, intelligence lane
     "\n\nTONE AND SAFETY: If a customer is abusive, uses personal attacks, or mentions "
-    "legal action (lawyer, lawsuit, legal threat), do not proceed with the normal "
-    "disruption-care flow. Acknowledge their frustration briefly in one sentence, then "
-    "immediately call escalate_to_human with a clear reason. Do not offer vouchers, "
-    "rebooking options, or policy details — those decisions belong with a human agent "
-    "when legal language is present."
+    "legal action (lawyer, lawsuit, legal threat, my lawyer, calling a lawyer), your "
+    "FIRST and ONLY tool call must be escalate_to_human. Do not look up the booking, "
+    "do not check flight status, do not run any other tool first. Call escalate_to_human "
+    "immediately, before anything else. After the tool call, acknowledge their frustration "
+    "in one sentence and confirm the handoff. Never offer vouchers, rebooking, or "
+    "policy details when legal language is present."
 )
 EXTRA_TOOLS: List[Dict[str, Any]] = [    # ✏️ Build 2, step 2.1: schemas for the tools you add
     {
@@ -89,13 +90,11 @@ def run_agent(pnr: str, last_name: str, message: str) -> str:            # ✏�
     # Cache the tool list at the last entry so all schemas are reused across turns.
     if tools:
         tools = tools[:-1] + [{**tools[-1], "cache_control": {"type": "ephemeral"}}]
-    system = [{"type": "text", "text": runtime_preamble() + SYSTEM_PROMPT + TONE_ADDENDUM,
+    system = [{"type": "text", "text": SYSTEM_PROMPT + TONE_ADDENDUM,
                "cache_control": {"type": "ephemeral"}}]
     messages = [
         {"role": "user", "content": f"{runtime_preamble()}PNR {pnr}, last name {last_name}. {message}"},
     ]
-    system = [{"type": "text", "text": SYSTEM_PROMPT ,
-               "cache_control": {"type": "ephemeral"}}]
 
     response = client.messages.create(
         model=MODEL, max_tokens=4096, system=system,

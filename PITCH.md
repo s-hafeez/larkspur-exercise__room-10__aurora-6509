@@ -12,13 +12,13 @@ Guardrail: Rebooking requires a customer-minted confirmation token; groups, mino
 
 Next: Commit the proof pack (readout.py, ACCOUNT.md, PITCH.md) and file the three-line issue on the other pod's repo
 
-Still broken: TONE_ADDENDUM fires on keywords alone — a calm but firm complaint is not an abuse case and could be mis-routed to escalation
+Still broken: TONE_ADDENDUM fires on keywords alone — "calling my lawyer" as a frustrated figure of speech gets escalated the same way a genuine legal threat does; a calm but firm complaint could be mis-routed
 
-Lever: cost
+Lever: intelligence
 
 ## Priya asked
 
-Costs: $0.026 per resolved contact with prompt caching vs $6.90 human — but that figure excludes infra, escalation handling, and ops overhead to keep policy rows current
+Costs: ~$0.034 per resolved contact at sonnet-5 proxy rates (bench.py has no opus-5 price table; actual will be higher) vs $6.90 human — excludes infra, escalation handling, and ops overhead; cache hits cover 74% of input tokens at 10% of normal cost
 Wrong: First untrue thing: a stale policy row gives the wrong entitlement; recovery is the policy_row_id on every check_policy call, which a human can audit, and irreversible actions require either a customer-minted token or auto-escalate above threshold
 Runs it: The digital channel ops team — they update policy data when the Handbook changes and monitor MCP server uptime; no ML expertise required, every tool call and result is logged to the trace
 Left out: Refunds, groups over 9 pax, unaccompanied minors, partner codeshare segments, SSR flags, and bookings in active dispute — all hard-escalate to human; these are the highest-risk cases and were explicitly out of scope
