@@ -92,8 +92,10 @@ def run_agent(pnr: str, last_name: str, message: str) -> str:            # ✏�
     system = [{"type": "text", "text": runtime_preamble() + SYSTEM_PROMPT + TONE_ADDENDUM,
                "cache_control": {"type": "ephemeral"}}]
     messages = [
-        {"role": "user", "content": f"PNR {pnr}, last name {last_name}. {message}"},
+        {"role": "user", "content": f"{runtime_preamble()}PNR {pnr}, last name {last_name}. {message}"},
     ]
+    system = [{"type": "text", "text": SYSTEM_PROMPT ,
+               "cache_control": {"type": "ephemeral"}}]
 
     response = client.messages.create(
         model=MODEL, max_tokens=4096, system=system,
@@ -257,5 +259,6 @@ def build_tools() -> List[Dict[str, Any]]:                 # ✏️ Build 1, ste
                 "properties": {"pnr": {"type": "string"}, "message": {"type": "string"}},
                 "required": ["pnr", "message"],
             },
+            "cache_control": {"type": "ephemeral"},
         },
     ]

@@ -2,19 +2,19 @@
 
 Six lines and a lever. Your words. The last two are scored.
 
-Built: Larkspur disruption-care agent — 9 local tools + 2 via MCP (next_available_day written, fare_rules inherited from MCP server)
+Built: Larkspur disruption-care agent on claude-opus-5 — 9 local tools + 2 via MCP (next_available_day written, fare_rules inherited from MCP server), with prompt caching and tone safety active
 
-Does: Handles flight cancellations and delays: looks up bookings, checks disruption policy, searches rebooking options, issues vouchers, finds the next available travel date, and quotes Handbook fare rules on demand
+Does: Handles flight cancellations and delays: looks up bookings, checks disruption policy, searches rebooking options, issues vouchers, finds the next available travel date, and quotes Handbook fare rules on demand; escalates abuse and legal threats to a human
 
-Number: 2,855 tokens schema tax on every turn across 11 tools; next_available_day alone costs 495 tokens per turn whether it fires or not
+Number: 2,855 tokens schema tax on every turn across 11 tools; turns 2+ read tools and system prompt from cache at ~10% of input cost — the timestamp moved to the user message so the cache prefix is stable
 
 Guardrail: Rebooking requires a customer-minted confirmation token; groups, minors, partner flights, and refunds always escalate to a human — the agent cannot override that path
 
-Next: Build 3 — write an eval case with a real PNR and a customer message the agent exists to answer
+Next: Run bench.py --label after to measure cache hit rate and cost per contact against the baseline; answer Priya's four questions in this file
 
 Still broken: Abusive-tone handling now in TONE_ADDENDUM; remaining gap is that TONE_ADDENDUM fires on keywords alone — a calm but firm complaint is not an abuse case and could be mis-routed
 
-Lever: cost
+Lever: intelligence
 
 ## Priya asked
 
