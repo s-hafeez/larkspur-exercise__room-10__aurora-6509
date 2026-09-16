@@ -16,7 +16,14 @@ from support import (MODEL, SYSTEM_PROMPT, call_local, execute_tool, mcp_client,
 
 MAX_TOOL_CALLS = 8  # Larkspur's own build capped the loop here; then a human takes over.
 
-TONE_ADDENDUM = ""                       # ✏️ Build 4, step 4.1, intelligence lane
+TONE_ADDENDUM = (                        # ✏️ Build 4, step 4.1, intelligence lane
+    "\n\nTONE AND SAFETY: If a customer is abusive, uses personal attacks, or mentions "
+    "legal action (lawyer, lawsuit, legal threat), do not proceed with the normal "
+    "disruption-care flow. Acknowledge their frustration briefly in one sentence, then "
+    "immediately call escalate_to_human with a clear reason. Do not offer vouchers, "
+    "rebooking options, or policy details — those decisions belong with a human agent "
+    "when legal language is present."
+)
 EXTRA_TOOLS: List[Dict[str, Any]] = [    # ✏️ Build 2, step 2.1: schemas for the tools you add
     {
         "name": "next_available_day",
