@@ -1,5 +1,6 @@
 # ACCOUNT.md
 
-Account: Larkspur Airlines
-Workflow: Customer disruption handling — a passenger message triggers lookup of their booking and flight status, the agent checks disruption policy and issues eligible vouchers or searches rebooking options, irreversible actions require a customer token or escalate to a human agent; policy changes are row edits with a changelog owner, not prompt edits.
-Date: 2026-10-07
+room10 · account
+Account: Accenture client - a global industrial manufacturing company where service desk volume is high and resolution time is a known pain point.
+Workflow: Customer complaint triage — agent reads incoming tickets, classifies them, drafts a response for human review, and escalates anything touching a refund or policy exception.
+Date: October 3, 2026 — already on the client's calendar for a quarterly AI review.
