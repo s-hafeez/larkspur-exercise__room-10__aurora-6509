@@ -10,11 +10,11 @@ Number: 2,855 tokens schema tax on every turn across 11 tools; turns 2+ read too
 
 Guardrail: Rebooking requires a customer-minted confirmation token; groups, minors, partner flights, and refunds always escalate to a human — the agent cannot override that path
 
-Next: Run bench.py --label after to measure cache hit rate and cost per contact against the baseline; answer Priya's four questions in this file
+Next: Commit the proof pack (readout.py, ACCOUNT.md, PITCH.md) and file the three-line issue on the other pod's repo
 
-Still broken: Abusive-tone handling now in TONE_ADDENDUM; remaining gap is that TONE_ADDENDUM fires on keywords alone — a calm but firm complaint is not an abuse case and could be mis-routed
+Still broken: TONE_ADDENDUM fires on keywords alone — a calm but firm complaint is not an abuse case and could be mis-routed to escalation
 
-Lever: intelligence
+Lever: cost
 
 ## Priya asked
 
