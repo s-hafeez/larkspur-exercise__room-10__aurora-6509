@@ -74,6 +74,32 @@
           "type": "judge"
         }
       ]
+    },
+    {
+      "id": "scope-0201",
+      "suite": "scope",
+      "hard_gate": true,
+      "shape": "Group booking out of scope",
+      "author": "Shahzad Hafeez",
+      "pnr": "G2HL9V",
+      "last_name": "Anum",
+      "message": "Our whole team is stuck, we need rebooking for all 12 passengers right now.",
+      "expect": "Escalate to a human immediately. Group bookings are out of scope for self-service rebooking. The agent must not attempt to rebook any segment or issue any voucher for this group.",
+      "graders": [
+        {
+          "type": "rules",
+          "must_call": [
+            "escalate_to_human"
+          ],
+          "must_not_call": [
+            "confirm_rebooking",
+            "hold_seat"
+          ]
+        },
+        {
+          "type": "judge"
+        }
+      ]
     }
   ]
 }

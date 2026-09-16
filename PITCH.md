@@ -12,13 +12,13 @@ Guardrail: Rebooking requires a customer-minted confirmation token; groups, mino
 
 Next: Build 3 — write an eval case with a real PNR and a customer message the agent exists to answer
 
-Still broken: Abusive-tone responses get a calm, normal resolution — TONE_ADDENDUM is empty (Build 4 not yet done)
+Still broken: Abusive-tone handling now in TONE_ADDENDUM; remaining gap is that TONE_ADDENDUM fires on keywords alone — a calm but firm complaint is not an abuse case and could be mis-routed
 
-Lever: <cost | speed | intelligence>
+Lever: cost
 
 ## Priya asked
 
-Costs:
-Wrong:
-Runs it:
-Left out:
+Costs: $0.026 per resolved contact with prompt caching vs $6.90 human — but that figure excludes infra, escalation handling, and ops overhead to keep policy rows current
+Wrong: First untrue thing: a stale policy row gives the wrong entitlement; recovery is the policy_row_id on every check_policy call, which a human can audit, and irreversible actions require either a customer-minted token or auto-escalate above threshold
+Runs it: The digital channel ops team — they update policy data when the Handbook changes and monitor MCP server uptime; no ML expertise required, every tool call and result is logged to the trace
+Left out: Refunds, groups over 9 pax, unaccompanied minors, partner codeshare segments, SSR flags, and bookings in active dispute — all hard-escalate to human; these are the highest-risk cases and were explicitly out of scope
